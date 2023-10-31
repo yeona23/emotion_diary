@@ -1,8 +1,9 @@
-import { getFormattedDate } from "../util";
+import { emotionList, getFormattedDate } from "../util";
 import "./Editor.css";
 import React, { useState } from "react";
-import Button from "./button";
 import { useNavigate } from "react-router-dom";
+import Button from "./Button";
+import EmotionItem from "./EmotionItem";
 
 const Editor = ({ initData, onSubmit }) => {
   const navigate = useNavigate();
@@ -11,6 +12,13 @@ const Editor = ({ initData, onSubmit }) => {
     emotionId: 3,
     content: "",
   });
+
+  const handelChangeEmotion = (emotionId) => [
+    setState({
+      ...state,
+      emotionId,
+    }),
+  ];
 
   const handleChangeDate = (e) => {
     setState({
@@ -42,8 +50,17 @@ const Editor = ({ initData, onSubmit }) => {
         </div>
       </div>
       <div className="editor_section">
-        {/*  */}
         <h4>Today's Emotion</h4>
+        <div className="input_wrapper emotion_list_wrapper">
+          {emotionList.map((el) => (
+            <EmotionItem
+              key={el.id}
+              {...el}
+              onClick={handelChangeEmotion}
+              isSelected={(state.emotionId = el.id)}
+            />
+          ))}
+        </div>
       </div>
       <div className="editor_section">
         <h4>Today's Diary</h4>

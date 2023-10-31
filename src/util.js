@@ -22,6 +22,34 @@ export const getEmotionImgById = (emotionId) => {
   }
 };
 
+export const emotionList = [
+  {
+    id: 1,
+    name: "very good!",
+    img: getEmotionImgById(1),
+  },
+  {
+    id: 2,
+    name: "good",
+    img: getEmotionImgById(2),
+  },
+  {
+    id: 3,
+    name: "Not bad",
+    img: getEmotionImgById(3),
+  },
+  {
+    id: 4,
+    name: "bad",
+    img: getEmotionImgById(4),
+  },
+  {
+    id: 5,
+    name: "terrible",
+    img: getEmotionImgById(5),
+  },
+];
+
 export const getFormattedDate = (targetDate) => {
   let year = targetDate.getFullYear();
   let month = (targetDate.getMonth() + 1).toString().padStart(2, "0");
