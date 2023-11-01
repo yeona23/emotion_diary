@@ -1,5 +1,5 @@
 import { Routes, Route, Link } from "react-router-dom";
-import { useEffect, useReducer, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import "./App.css";
 import Home from "./pages/Home";
 import New from "./pages/New";
@@ -98,16 +98,22 @@ const App = () => {
     return <div>데이터를 불러오는 중입니다</div>;
   } else {
     return (
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/new" element={<New />} />
-          <Route path="/diary/:id" element={<Diary />} />
-          <Route path="/edit" element={<Edit />} />
-        </Routes>
-      </div>
+      <DiaryStateContext.Provider value={data}>
+        <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/new" element={<New />} />
+              <Route path="/diary/:id" element={<Diary />} />
+              <Route path="/edit" element={<Edit />} />
+            </Routes>
+          </div>
+        </DiaryDispatchContext.Provider>
+      </DiaryStateContext.Provider>
     );
   }
 };
 
 export default App;
+export const DiaryStateContext = React.createContext();
+export const DiaryDispatchContext = React.createContext();
